@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>✨ Feliz Cumpleaños, Annie ✨</title>
+
+  <!-- Google Fonts: Great Vibes, Playfair Display y Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#090a1a',
+            indigoNight: '#1a1128',
+            goldWarm: '#ffd166',
+            goldRich: '#f4b942',
+            roseSoft: '#ff758f',
+            roseGlow: '#ff9eb5',
+          },
+          fontFamily: {
+            script: ['"Great Vibes"', 'cursive'],
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Quicksand"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ============================================================
+       ESTILOS BASE Y PALETA NOCTURNA DORADA
+       ============================================================ */
+    :root {
+      --bg-deep: #090a1a;
+      --bg-mid: #130f26;
+      --bg-violet: #1a1128;
+      --gold: #ffd166;
+      --gold-rich: #f4b942;
+      --rose: #ff758f;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      background: radial-gradient(ellipse at top, #1d1536 0%, #110d24 45%, #090a1a 100%);
+      color: #fdf6ec;
+      font-family: 'Quicksand', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* Fondo fijo de canvas interactivo */
+    #magic-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Capa de contenido principal */
+    #main-content {
+      position: relative;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    #main-content.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       PANTALLA DE BIENVENIDA / CORTINA MÁGICA (INTRO)
+       ============================================================ */
+    #intro-curtain {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: radial-gradient(circle at center, #1e1438 0%, #0e0b20 55%, #070814 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.1s ease, transform 1.1s ease;
+    }
+
+    #intro-curtain.hidden-curtain {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.06);
+      pointer-events: none;
+    }
+
+    .floating-gift {
+      animation: floatGentle 3.6s ease-in-out infinite;
+      filter: drop-shadow(0 0 28px rgba(255, 209, 102, 0.45));
+    }
+
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+      50% { transform: translateY(-14px) rotate(1.5deg); }
+    }
+
+    /* ============================================================
+       EFECTO DE BRILLO DORADO (SHIMMER) PARA "ANNIE MI MENSA"
+       ============================================================ */
+    .shimmer-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3.6rem, 11.5vw, 7.8rem);
+      line-height: 1.14;
+      background: linear-gradient(
+        110deg,
+        #f4b942 0%,
+        #fff2b2 22%,
+        #ffd166 40%,
+        #ff9eb5 52%,
+        #fff8d6 65%,
+        #f4b942 82%,
+        #ffd166 100%
+      );
+      background-size: 240% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmerFlow 5s linear infinite;
+      filter: drop-shadow(0 0 24px rgba(255, 209, 102, 0.45))
+              drop-shadow(0 6px 18px rgba(255, 117, 143, 0.25));
+      padding: 0.2em 0.15em;
+    }
+
+    @keyframes shimmerFlow {
+      0% { background-position: 0% center; }
+      100% { background-position: 240% center; }
+    }
+
+    .heart-beat {
+      animation: heartPulse 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 14px rgba(255, 117, 143, 0.75));
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      18% { transform: scale(1.22); }
+      32% { transform: scale(1.04); }
+      48% { transform: scale(1.18); }
+      68% { transform: scale(1); }
+    }
+
+    .sparkle-twinkle {
+      animation: sparklePop 2.6s ease-in-out infinite;
+    }
+
+    @keyframes sparklePop {
+      0%, 100% { opacity: 0.35; transform: scale(0.8) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.22) rotate(18deg); }
+    }
+
+    /* ============================================================
+       BOTONES DORADOS ELEGANTES
+       ============================================================ */
+    .btn-gold {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffd166 0%, #f4b942 50%, #ff8fa3 100%);
+      color: #1a1026;
+      font-weight: 700;
+      box-shadow: 0 8px 30px rgba(255, 209, 102, 0.35), 0 0 0 1px rgba(255, 240, 190, 0.45) inset;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 36px rgba(255, 209, 102, 0.55), 0 0 22px rgba(255, 117, 143, 0.35);
+    }
+
+    .btn-gold:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .btn-gold::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+      transform: skewX(-24deg);
+      animation: btnShine 3.8s ease-in-out infinite;
+    }
+
+    @keyframes btnShine {
+      0%, 60% { left: -120%; }
+      100% { left: 160%; }
+    }
+
+    /* ============================================================
+       GLASSMORPHISM ELEGANTE
+       ============================================================ */
+    .glass-panel {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 209, 102, 0.04));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 209, 102, 0.26);
+      box-shadow: 0 16px 42px rgba(4, 4, 15, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    /* ============================================================
+       PASTEL DE CUMPLEAÑOS INTERACTIVO Y VELAS REALISTAS
+       ============================================================ */
+    .candle-group {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .candle-group:hover {
+      transform: translateY(-3px);
+    }
+
+    .flame-wrapper {
+      transform-origin: center bottom;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .flame-outer {
+      transform-origin: center bottom;
+      animation: flameFlicker 0.85s ease-in-out infinite alternate;
+    }
+
+    .flame-inner {
+      transform-origin: center bottom;
+      animation: flameInnerFlicker 0.6s ease-in-out infinite alternate;
+    }
+
+    .flame-glow {
+      animation: glowPulse 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes flameFlicker {
+      0%   { transform: scaleX(0.95) scaleY(1) skewX(-2deg); }
+      33%  { transform: scaleX(1.04) scaleY(1.08) skewX(2.5deg); }
+      66%  { transform: scaleX(0.97) scaleY(0.94) skewX(-1.5deg); }
+      100% { transform: scaleX(1.03) scaleY(1.06) skewX(1.8deg); }
+    }
+
+    @keyframes flameInnerFlicker {
+      0%   { transform: scale(0.92, 0.96); }
+      100% { transform: scale(1.06, 1.08); }
+    }
+
+    @keyframes glowPulse {
+      0%   { opacity: 0.45; transform: scale(0.94); }
+      100% { opacity: 0.85; transform: scale(1.12); }
+    }
+
+    .candle-blown .flame-wrapper {
+      opacity: 0;
+      transform: scale(0.1) translateY(-10px);
+      pointer-events: none;
+    }
+
+    /* Humo suave al soplar las velas */
+    .smoke-puff {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .candle-blown .smoke-puff {
+      animation: smokeRise 2.1s ease-out forwards;
+    }
+
+    @keyframes smokeRise {
+      0%   { opacity: 0; transform: translate(0, 0) scale(0.5); }
+      20%  { opacity: 0.72; transform: translate(-3px, -14px) scale(0.95); }
+      60%  { opacity: 0.4; transform: translate(6px, -36px) scale(1.35); }
+      100% { opacity: 0; transform: translate(-4px, -60px) scale(1.8); }
+    }
+
+    /* ============================================================
+       SOBRE 3D Y CARTA DE AMOR INTERACTIVA
+       ============================================================ */
+    .envelope-stage {
+      perspective: 1200px;
+    }
+
+    .envelope-container {
+      position: relative;
+      width: min(340px, 88vw);
+      height: 225px;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .envelope-container:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(155deg, #2a1d42 0%, #1c1330 100%);
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 209, 102, 0.45);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.55), 0 0 32px rgba(255, 209, 102, 0.16);
+      overflow: hidden;
+    }
+
+    /* Carta asomándose dentro del sobre */
+    .envelope-letter-peek {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 14px;
+      height: 175px;
+      background: linear-gradient(180deg, #fffdf7 0%, #fcefd7 100%);
+      border-radius: 10px;
+      border: 1px solid rgba(244, 185, 66, 0.55);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      transform: translateY(10px);
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 1.2rem;
+      color: #4a2538;
+    }
+
+    .envelope-container.opened .envelope-letter-peek {
+      transform: translateY(-88px);
+    }
+
+    /* Bolsillo delantero del sobre */
+    .envelope-pocket {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .envelope-pocket::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #33224f 0%, #211538 100%);
+      clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
+      border-top: 1px solid rgba(255, 209, 102, 0.3);
+    }
+
+    .envelope-pocket::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 209, 102, 0.14), rgba(255, 117, 143, 0.08));
+      clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+    }
+
+    /* Solapa superior animada en 3D */
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 126px;
+      z-index: 4;
+      transform-origin: top center;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.3s;
+    }
+
+    .envelope-flap-shape {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #3e2961 0%, #291a44 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+    }
+
+    .envelope-container.opened .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    /* Sello de lacre dorado con corazón */
+    .wax-seal {
+      position: absolute;
+      top: 95px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 30%, #ffe89e 0%, #f4b942 45%, #b87c1e 100%);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 18px rgba(255, 209, 102, 0.55), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease, transform 0.5s ease;
+    }
+
+    .envelope-container.opened .wax-seal {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.4) rotate(25deg);
+      pointer-events: none;
+    }
+
+    /* Carta desplegada (Modal elegante) */
+    #letter-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(7, 6, 18, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+
+    #letter-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .letter-paper {
+      width: min(620px, 96vw);
+      max-height: 88vh;
+      overflow-y: auto;
+      background: linear-gradient(165deg, #fffdf7 0%, #fdf4e3 55%, #fae8cf 100%);
+      color: #362030;
+      border-radius: 20px;
+      border: 2px solid rgba(244, 185, 66, 0.75);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(255, 209, 102, 0.25);
+      transform: translateY(35px) scale(0.94);
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+
+    #letter-modal.open .letter-paper {
+      transform: translateY(0) scale(1);
+    }
+
+    /* Scrollbar sutil en la carta */
+    .letter-paper::-webkit-scrollbar {
+      width: 6px;
+    }
+    .letter-paper::-webkit-scrollbar-thumb {
+      background: rgba(212, 152, 48, 0.45);
+      border-radius: 999px;
+    }
+
+    /* ============================================================
+       TARJETAS 3D FLIP ("PEQUEÑAS COSAS QUE AMO DE TI")
+       ============================================================ */
+    .flip-card {
+      perspective: 1100px;
+      height: 235px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.75s cubic-bezier(0.34, 1.32, 0.64, 1);
+      transform-style: preserve-3d;
+    }
+
+    /* En dispositivos con puntero fino (mouse), permite también hover o click */
+    @media (hover: hover) and (pointer: fine) {
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .flip-card.is-flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 1.25rem;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .flip-card-front {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 209, 102, 0.04));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 209, 102, 0.34);
+      box-shadow: 0 12px 30px rgba(4, 4, 15, 0.45);
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(145deg, rgba(46, 26, 66, 0.92), rgba(28, 17, 45, 0.95));
+      border: 1.5px solid rgba(255, 117, 143, 0.55);
+      box-shadow: 0 14px 36px rgba(255, 117, 143, 0.2), inset 0 0 24px rgba(255, 209, 102, 0.12);
+    }
+
+    /* ============================================================
+       ANIMACIÓN DE APARICIÓN AL HACER SCROLL
+       ============================================================ */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Toast discreto (sin alert) */
+    #toast-message {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      z-index: 70;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+
+    #toast-message.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="selection:bg-goldWarm/30 selection:text-goldWarm">
+
+  <!-- ============================================================
+       CANVAS INTERACTIVO A PANTALLA COMPLETA (60 FPS)
+       Estrellas, luciérnagas, pétalos dorados, linternas y fuegos artificiales
+       ============================================================ -->
+  <canvas id="magic-canvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       BOTÓN FLOTANTE DE MÚSICA (CAJA DE MÚSICA WEB AUDIO API)
+       ============================================================ -->
+  <button
+    id="music-toggle"
+    type="button"
+    aria-label="Activar o silenciar la música de cumpleaños"
+    class="fixed top-4 right-4 z-40 hidden items-center gap-2 px-3.5 py-2.5 rounded-full glass-panel text-xs sm:text-sm font-semibold text-goldWarm hover:border-goldWarm/70 transition-all duration-300 shadow-lg"
+  >
+    <span id="music-icon" class="text-base leading-none">🎵</span>
+    <span id="music-label" class="hidden sm:inline">Música: ON</span>
+  </button>
+
+  <!-- ============================================================
+       1. PANTALLA DE BIENVENIDA / CORTINA MÁGICA (INTRO)
+       ============================================================ -->
+  <section id="intro-curtain" role="dialog" aria-modal="true" aria-label="Sorpresa de cumpleaños">
+    <div class="max-w-md w-full text-center flex flex-col items-center">
+      <!-- Regalo brillante flotante en SVG -->
+      <div class="floating-gift mb-7">
+        <svg width="132" height="132" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="giftHalo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffd166" stop-opacity="0.45"/>
+              <stop offset="65%" stop-color="#ff758f" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="boxGrad" x1="25" y1="55" x2="115" y2="122" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#3c265e"/>
+              <stop offset="100%" stop-color="#1e1336"/>
+            </linearGradient>
+            <linearGradient id="lidGrad" x1="20" y1="42" x2="120" y2="62" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#51347d"/>
+              <stop offset="100%" stop-color="#2c1b47"/>
+            </linearGradient>
+            <linearGradient id="ribbonGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fff2b2"/>
+              <stop offset="50%" stop-color="#ffd166"/>
+              <stop offset="100%" stop-color="#f4b942"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Halo de luz -->
+          <circle cx="70" cy="72" r="64" fill="url(#giftHalo)"/>
+
+          <!-- Destellos alrededor -->
+          <path d="M24 34L26 28L28 34L34 36L28 38L26 44L24 38L18 36L24 34Z" fill="#ffd166" class="sparkle-twinkle"/>
+          <path d="M114 28L115.5 23L117 28L122 29.5L117 31L115.5 36L114 31L109 29.5L114 28Z" fill="#ff9eb5" class="sparkle-twinkle" style="animation-delay:0.9s"/>
+          <circle cx="118" cy="78" r="2.5" fill="#ffd166" class="sparkle-twinkle" style="animation-delay:0.4s"/>
+          <circle cx="20" cy="86" r="2" fill="#fff2b2" class="sparkle-twinkle" style="animation-delay:1.3s"/>
+
+          <!-- Cuerpo de la caja -->
+          <rect x="28" y="60" width="84" height="58" rx="10" fill="url(#boxGrad)" stroke="#ffd166" stroke-width="2"/>
+          <!-- Tapa -->
+          <rect x="22" y="44" width="96" height="20" rx="7" fill="url(#lidGrad)" stroke="#ffd166" stroke-width="2"/>
+          <!-- Cinta vertical -->
+          <rect x="61" y="44" width="18" height="74" fill="url(#ribbonGold)"/>
+          <!-- Cinta horizontal sutil -->
+          <rect x="28" y="84" width="84" height="10" fill="url(#ribbonGold)" opacity="0.88"/>
+          <!-- Moño superior -->
+          <path d="M70 44C62 24 38 22 42 36C45 45 60 44 70 44Z" fill="url(#ribbonGold)" stroke="#fff4cc" stroke-width="1.2"/>
+          <path d="M70 44C78 24 102 22 98 36C95 45 80 44 70 44Z" fill="url(#ribbonGold)" stroke="#fff4cc" stroke-width="1.2"/>
+          <!-- Corazón central en el moño -->
+          <path d="M70 50C70 50 61 44.5 61 39.5C61 36.8 63.2 35 65.5 35C67.3 35 69 36.1 70 37.6C71 36.1 72.7 35 74.5 35C76.8 35 79 36.8 79 39.5C79 44.5 70 50 70 50Z" fill="#ff758f" stroke="#fff3d1" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <p class="text-xs sm:text-sm uppercase tracking-[0.28em] text-goldWarm/85 font-semibold mb-3">
+        Un regalo hecho con todo mi cariño
+      </p>
+
+      <h1 class="font-serif italic text-3xl sm:text-4xl text-white mb-4 leading-snug">
+        Tengo una sorpresa para ti...
+      </h1>
+
+      <p class="text-sm sm:text-base text-purple-100/75 mb-8 max-w-xs leading-relaxed">
+        Sube un poquito el volumen.
+      </p>
+
+      <button
+        id="open-surprise-btn"
+        type="button"
+        class="btn-gold px-8 py-4 rounded-full text-base sm:text-lg tracking-wide cursor-pointer"
+      >
+        Abrir
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTENIDO PRINCIPAL DE LA PÁGINA
+       ============================================================ -->
+  <main id="main-content" class="relative w-full">
+
+    <!-- ==========================================================
+         2. SECCIÓN HERO (LO MÁS RESALTANTE: "ANNIE MI MENSA")
+         ========================================================== -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-20 pb-16 overflow-hidden">
+
+      <!-- Flores doradas estilizadas en SVG en las esquinas (decorativas y responsivas) -->
+      <svg class="pointer-events-none absolute top-4 left-2 sm:top-8 sm:left-8 w-24 h-24 sm:w-40 sm:h-40 opacity-55" viewBox="0 0 180 180" fill="none" aria-hidden="true">
+        <g stroke="#ffd166" stroke-width="1.3" stroke-linecap="round">
+          <path d="M18 162 C 25 100, 62 58, 152 24" opacity="0.65"/>
+          <path d="M35 128 C 60 118, 72 102, 78 88" opacity="0.55"/>
+          <path d="M68 82 C 58 55, 72 34, 96 28" opacity="0.55"/>
+          <!-- Flor estilizada 1 -->
+          <g transform="translate(52 60)">
+            <ellipse cx="0" cy="-12" rx="5.5" ry="12" fill="#ffd166" fill-opacity="0.16"/>
+            <ellipse cx="0" cy="12" rx="5.5" ry="12" fill="#ffd166" fill-opacity="0.16"/>
+            <ellipse cx="-12" cy="0" rx="12" ry="5.5" fill="#ffd166" fill-opacity="0.16"/>
+            <ellipse cx="12" cy="0" rx="12" ry="5.5" fill="#ffd166" fill-opacity="0.16"/>
+            <circle cx="0" cy="0" r="4" fill="#ff9eb5"/>
+          </g>
+          <!-- Flor estilizada 2 -->
+          <g transform="translate(106 34) scale(0.72)">
+            <ellipse cx="0" cy="-12" rx="5" ry="12" fill="#ffd166" fill-opacity="0.18"/>
+            <ellipse cx="0" cy="12" rx="5" ry="12" fill="#ffd166" fill-opacity="0.18"/>
+            <ellipse cx="-12" cy="0" rx="12" ry="5" fill="#ffd166" fill-opacity="0.18"/>
+            <ellipse cx="12" cy="0" rx="12" ry="5" fill="#ffd166" fill-opacity="0.18"/>
+            <circle cx="0" cy="0" r="4" fill="#ffd166"/>
+          </g>
+          <!-- Hojitas -->
+          <path d="M24 140 Q 42 130 48 112 Q 30 118 24 140 Z" fill="#ffd166" fill-opacity="0.12"/>
+          <path d="M88 55 Q 108 55 122 44 Q 102 38 88 55 Z" fill="#ffd166" fill-opacity="0.12"/>
+        </g>
+      </svg>
+
+      <svg class="pointer-events-none absolute bottom-4 right-2 sm:bottom-8 sm:right-8 w-24 h-24 sm:w-40 sm:h-40 opacity-55 rotate-180" viewBox="0 0 180 180" fill="none" aria-hidden="true">
+        <g stroke="#ffd166" stroke-width="1.3" stroke-linecap="round">
+          <path d="M18 162 C 25 100, 62 58, 152 24" opacity="0.65"/>
+          <path d="M35 128 C 60 118, 72 102, 78 88" opacity="0.55"/>
+          <path d="M68 82 C 58 55, 72 34, 96 28" opacity="0.55"/>
+          <g transform="translate(52 60)">
+            <ellipse cx="0" cy="-12" rx="5.5" ry="12" fill="#ffd166" fill-opacity="0.16"/>
+            <ellipse cx="0" cy="12" rx="5.5" ry="12" fill="#ffd166" fill-opacity="0.16"/>
+            <ellipse cx="-12" cy="0" rx="12" ry="5.5" fill="#ffd166" fill-opacity="0.16"/>
+            <ellipse cx="12" cy="0" rx="12" ry="5.5" fill="#ffd166" fill-opacity="0.16"/>
+            <circle cx="0" cy="0" r="4" fill="#ff9eb5"/>
+          </g>
+          <g transform="translate(106 34) scale(0.72)">
+            <ellipse cx="0" cy="-12" rx="5" ry="12" fill="#ffd166" fill-opacity="0.18"/>
+            <ellipse cx="0" cy="12" rx="5" ry="12" fill="#ffd166" fill-opacity="0.18"/>
+            <ellipse cx="-12" cy="0" rx="12" ry="5" fill="#ffd166" fill-opacity="0.18"/>
+            <ellipse cx="12" cy="0" rx="12" ry="5" fill="#ffd166" fill-opacity="0.18"/>
+            <circle cx="0" cy="0" r="4" fill="#ffd166"/>
+          </g>
+          <path d="M24 140 Q 42 130 48 112 Q 30 118 24 140 Z" fill="#ffd166" fill-opacity="0.12"/>
+          <path d="M88 55 Q 108 55 122 44 Q 102 38 88 55 Z" fill="#ffd166" fill-opacity="0.12"/>
+        </g>
+      </svg>
+
+      <!-- Contenedor Central Hero -->
+      <div class="relative z-10 max-w-4xl w-full mx-auto text-center flex flex-col items-center">
+        <!-- Etiqueta superior luminosa -->
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel border-goldWarm/40 mb-6 shadow-[0_0_24px_rgba(255,209,102,0.18)]">
+          <span class="text-xs sm:text-sm font-semibold tracking-wider text-goldWarm">
+             Hoy es un día muy especial 
+          </span>
+        </div>
+
+        <!-- Subtítulo romántico -->
+        <h2 class="font-serif italic text-2xl sm:text-4xl md:text-5xl text-roseGlow/95 tracking-wide mb-2 drop-shadow-[0_2px_12px_rgba(255,117,143,0.4)]">
+          ¡Feliz Cumpleaños!
+        </h2>
+
+        <!-- GRAN TÍTULO CENTRAL PROTAGONISTA: "Annie mi mensa" -->
+        <div class="relative inline-block my-2 sm:my-4 px-2 sm:px-6">
+          <!-- Destellos decorativos alrededor del título -->
+          <svg class="sparkle-twinkle absolute -top-4 -left-1 sm:-left-4 w-7 h-7 sm:w-9 sm:h-9 text-goldWarm" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M16 1 L19 13 L31 16 L19 19 L16 31 L13 19 L1 16 L13 13 Z"/>
+          </svg>
+          <svg class="sparkle-twinkle absolute -top-2 right-0 sm:-right-4 w-5 h-5 sm:w-7 sm:h-7 text-roseSoft" style="animation-delay: 0.8s;" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M16 1 L19 13 L31 16 L19 19 L16 31 L13 19 L1 16 L13 13 Z"/>
+          </svg>
+          <svg class="sparkle-twinkle absolute bottom-1 left-2 sm:left-0 w-4 h-4 sm:w-6 sm:h-6 text-amber-200" style="animation-delay: 1.5s;" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M16 1 L19 13 L31 16 L19 19 L16 31 L13 19 L1 16 L13 13 Z"/>
+          </svg>
+
+          <h1 class="shimmer-title select-none">
+            Annie mi niña
+          </h1>
+        </div>
+
+        <!-- Corazón brillante latiendo suavemente -->
+        <div class="flex items-center justify-center gap-4 my-3">
+          <span class="h-px w-14 sm:w-24 bg-gradient-to-r from-transparent to-goldWarm/70"></span>
+          <svg class="heart-beat w-9 h-9 sm:w-11 sm:h-11 text-roseSoft" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span class="h-px w-14 sm:w-24 bg-gradient-to-l from-transparent to-goldWarm/70"></span>
+        </div>
+
+        <!-- Frase emotiva debajo -->
+        <p class="mt-4 max-w-2xl text-base sm:text-xl text-amber-50/90 font-medium leading-relaxed px-3 drop-shadow">
+          “Un año mas contigo, me faltan 40 para poder ser tu esposito perfecto :(.”
+        </p>
+
+        <!-- Consejo interactivo sutil -->
+        <p class="mt-7 text-xs sm:text-sm text-goldWarm/70 tracking-wide">
+          ✨ Tip: toca cualquier parte del cielo  ✨
+        </p>
+
+        <!-- Botón bajar suavemente -->
+        <a
+          href="#seccion-pastel"
+          class="mt-8 inline-flex flex-col items-center gap-1 text-goldWarm/80 hover:text-goldWarm transition-colors"
+          aria-label="Deslizar hacia el pastel de cumpleaños"
+        >
+          <span class="text-xs uppercase tracking-[0.2em]">Sigue bajando</span>
+          <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         3. PASTEL DE CUMPLEAÑOS INTERACTIVO ("PIDE UN DESEO")
+         ========================================================== -->
+    <section id="seccion-pastel" class="reveal-on-scroll relative py-16 sm:py-24 px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto">
+        <div class="glass-panel rounded-3xl p-6 sm:p-10 md:p-12 text-center relative overflow-hidden">
+          <!-- Brillo de fondo sutil -->
+          <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-goldWarm/10 blur-3xl"></div>
+
+          <span class="inline-block text-xs sm:text-sm uppercase tracking-[0.25em] text-goldWarm/90 font-semibold mb-2">
+            Momento Mágico
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-bold mb-3">
+            Pide un deseo, Annie 
+          </h2>
+          <p id="cake-instruction" class="text-sm sm:text-base text-purple-100/80 max-w-md mx-auto mb-6">
+            Cierra los ojitos, piensa en tu deseo más bonito y toca cada velita o el botón para soplarlas.
+          </p>
+
+          <!-- Ilustración interactiva del Pastel en SVG -->
+          <div class="relative flex justify-center items-center my-4 select-none">
+            <svg id="birthday-cake-svg" class="w-full max-w-[340px] sm:max-w-[380px] h-auto drop-shadow-[0_18px_35px_rgba(0,0,0,0.5)]" viewBox="0 0 360 330" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pastel de cumpleaños con tres velas encendidas">
+              <defs>
+                <!-- Gradientes del pastel -->
+                <linearGradient id="plateGrad" x1="40" y1="278" x2="320" y2="296" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#f4b942"/>
+                  <stop offset="50%" stop-color="#fff0c2"/>
+                  <stop offset="100%" stop-color="#d4932a"/>
+                </linearGradient>
+                <linearGradient id="tierBottom" x1="70" y1="195" x2="290" y2="275" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ff9eb5"/>
+                  <stop offset="55%" stop-color="#ff758f"/>
+                  <stop offset="100%" stop-color="#d94e6e"/>
+                </linearGradient>
+                <linearGradient id="tierTop" x1="100" y1="128" x2="260" y2="195" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#fff5e6"/>
+                  <stop offset="100%" stop-color="#f7d9c4"/>
+                </linearGradient>
+                <linearGradient id="frostingRose" x1="100" y1="120" x2="260" y2="165" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ffb3c6"/>
+                  <stop offset="100%" stop-color="#ff758f"/>
+                </linearGradient>
+                <linearGradient id="candlePink" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#ffd166"/>
+                  <stop offset="50%" stop-color="#fff4cc"/>
+                  <stop offset="100%" stop-color="#f4b942"/>
+                </linearGradient>
+                <radialGradient id="flameAura" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffd166" stop-opacity="0.8"/>
+                  <stop offset="60%" stop-color="#ff9f43" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="flameOuterGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#fff7cc"/>
+                  <stop offset="45%" stop-color="#ffd166"/>
+                  <stop offset="100%" stop-color="#ff5e62"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Sombra y plato elegante -->
+              <ellipse cx="180" cy="296" rx="146" ry="20" fill="#060512" opacity="0.55"/>
+              <ellipse cx="180" cy="283" rx="140" ry="18" fill="url(#plateGrad)"/>
+              <ellipse cx="180" cy="279" rx="124" ry="13" fill="#fff8e8" opacity="0.88"/>
+
+              <!-- Piso inferior del pastel -->
+              <path d="M74 205 H286 V268 C286 278 238 286 180 286 C122 286 74 278 74 268 V205 Z" fill="url(#tierBottom)"/>
+              <ellipse cx="180" cy="205" rx="106" ry="16" fill="#ffb8c9"/>
+
+              <!-- Crema derretida (drips) dorada/crema en el piso inferior -->
+              <path d="M74 205 C74 218 85 232 95 232 C105 232 108 214 118 214 C128 214 132 238 144 238 C156 238 158 217 172 217 C185 217 188 242 200 242 C212 242 216 218 228 218 C240 218 245 234 256 234 C267 234 272 218 286 214 V205 H74 Z" fill="#fff3dc" opacity="0.95"/>
+
+              <!-- Perlas doradas en la base -->
+              <g fill="#ffd166">
+                <circle cx="88" cy="274" r="5"/>
+                <circle cx="106" cy="279" r="5"/>
+                <circle cx="126" cy="282" r="5"/>
+                <circle cx="147" cy="284" r="5"/>
+                <circle cx="169" cy="285" r="5"/>
+                <circle cx="191" cy="285" r="5"/>
+                <circle cx="213" cy="284" r="5"/>
+                <circle cx="234" cy="282" r="5"/>
+                <circle cx="254" cy="279" r="5"/>
+                <circle cx="272" cy="274" r="5"/>
+              </g>
+
+              <!-- Piso superior del pastel -->
+              <path d="M104 138 H256 V198 C256 207 222 213 180 213 C138 213 104 207 104 198 V138 Z" fill="url(#tierTop)"/>
+              <ellipse cx="180" cy="138" rx="76" ry="13" fill="#ff9eb5"/>
+
+              <!-- Glaseado rosa superior con gotitas -->
+              <path d="M104 138 C104 152 114 164 123 164 C132 164 136 149 145 149 C155 149 158 171 169 171 C180 171 184 152 195 152 C206 152 210 169 221 169 C232 169 235 150 245 150 C251 150 254 156 256 155 V138 H104 Z" fill="url(#frostingRose)"/>
+
+              <!-- Chispitas doradas y corazón en el frente -->
+              <path d="M180 198 C180 198 168 190 168 183 C168 179.5 171 177 174 177 C176.5 177 178.7 178.5 180 180.7 C181.3 178.5 183.5 177 186 177 C189 177 192 179.5 192 183 C192 190 180 198 180 198 Z" fill="#ff758f"/>
+              <circle cx="132" cy="184" r="3" fill="#ffd166"/>
+              <circle cx="228" cy="184" r="3" fill="#ffd166"/>
+              <circle cx="152" cy="193" r="2.3" fill="#f4b942"/>
+              <circle cx="208" cy="193" r="2.3" fill="#f4b942"/>
+
+              <!-- Perlas crema en la unión de los dos pisos -->
+              <g fill="#fff8eb">
+                <circle cx="110" cy="204" r="4.5"/>
+                <circle cx="126" cy="208" r="4.5"/>
+                <circle cx="144" cy="211" r="4.5"/>
+                <circle cx="162" cy="213" r="4.5"/>
+                <circle cx="180" cy="213" r="4.5"/>
+                <circle cx="198" cy="213" r="4.5"/>
+                <circle cx="216" cy="211" r="4.5"/>
+                <circle cx="234" cy="208" r="4.5"/>
+                <circle cx="250" cy="204" r="4.5"/>
+              </g>
+
+              <!-- ==================== VELA 1 (IZQUIERDA) ==================== -->
+              <g class="candle-group" data-candle="1" role="button" tabindex="0" aria-label="Vela 1, clic para soplar">
+                <!-- Área táctil amplia invisible -->
+                <rect x="120" y="34" width="38" height="106" fill="transparent"/>
+                <!-- Cuerpo vela -->
+                <rect x="132" y="84" width="14" height="54" rx="4" fill="url(#candlePink)"/>
+                <path d="M132 97 L146 91 M132 111 L146 105 M132 125 L146 119" stroke="#ff758f" stroke-width="2.5" opacity="0.65"/>
+                <!-- Mecha -->
+                <line x1="139" y1="84" x2="139" y2="76" stroke="#3b2621" stroke-width="2.2" stroke-linecap="round"/>
+                <!-- Humo al apagarse -->
+                <g class="smoke-puff">
+                  <circle cx="139" cy="70" r="6" fill="#e2d9f3" opacity="0.65"/>
+                  <circle cx="144" cy="58" r="8" fill="#ffffff" opacity="0.45"/>
+                  <circle cx="135" cy="46" r="10" fill="#e2d9f3" opacity="0.3"/>
+                </g>
+                <!-- Llama -->
+                <g class="flame-wrapper">
+                  <circle class="flame-glow" cx="139" cy="60" r="24" fill="url(#flameAura)"/>
+                  <path class="flame-outer" d="M139 38 C146 50 150 61 146 69 C143 74 135 74 132 69 C128 61 132 50 139 38 Z" fill="url(#flameOuterGrad)"/>
+                  <path class="flame-inner" d="M139 50 C142.5 57 144 63 142 67 C140.5 70 137.5 70 136 67 C134 63 135.5 57 139 50 Z" fill="#ffffff"/>
+                </g>
+              </g>
+
+              <!-- ==================== VELA 2 (CENTRO) ==================== -->
+              <g class="candle-group" data-candle="2" role="button" tabindex="0" aria-label="Vela 2, clic para soplar">
+                <rect x="161" y="20" width="38" height="118" fill="transparent"/>
+                <rect x="173" y="72" width="14" height="66" rx="4" fill="url(#candlePink)"/>
+                <path d="M173 86 L187 80 M173 100 L187 94 M173 114 L187 108 M173 128 L187 122" stroke="#ff758f" stroke-width="2.5" opacity="0.65"/>
+                <line x1="180" y1="72" x2="180" y2="64" stroke="#3b2621" stroke-width="2.2" stroke-linecap="round"/>
+                <g class="smoke-puff">
+                  <circle cx="180" cy="58" r="6" fill="#e2d9f3" opacity="0.65"/>
+                  <circle cx="186" cy="46" r="8" fill="#ffffff" opacity="0.45"/>
+                  <circle cx="176" cy="34" r="10" fill="#e2d9f3" opacity="0.3"/>
+                </g>
+                <g class="flame-wrapper">
+                  <circle class="flame-glow" cx="180" cy="48" r="26" fill="url(#flameAura)"/>
+                  <path class="flame-outer" style="animation-delay:0.25s" d="M180 25 C187.5 38 191.5 49 187.5 57 C184.5 62 175.5 62 172.5 57 C168.5 49 172.5 38 180 25 Z" fill="url(#flameOuterGrad)"/>
+                  <path class="flame-inner" style="animation-delay:0.15s" d="M180 38 C183.5 45 185 51 183 55 C181.5 58 178.5 58 177 55 C175 51 176.5 45 180 38 Z" fill="#ffffff"/>
+                </g>
+              </g>
+
+              <!-- ==================== VELA 3 (DERECHA) ==================== -->
+              <g class="candle-group" data-candle="3" role="button" tabindex="0" aria-label="Vela 3, clic para soplar">
+                <rect x="202" y="34" width="38" height="106" fill="transparent"/>
+                <rect x="214" y="84" width="14" height="54" rx="4" fill="url(#candlePink)"/>
+                <path d="M214 97 L228 91 M214 111 L228 105 M214 125 L228 119" stroke="#ff758f" stroke-width="2.5" opacity="0.65"/>
+                <line x1="221" y1="84" x2="221" y2="76" stroke="#3b2621" stroke-width="2.2" stroke-linecap="round"/>
+                <g class="smoke-puff">
+                  <circle cx="221" cy="70" r="6" fill="#e2d9f3" opacity="0.65"/>
+                  <circle cx="226" cy="58" r="8" fill="#ffffff" opacity="0.45"/>
+                  <circle cx="217" cy="46" r="10" fill="#e2d9f3" opacity="0.3"/>
+                </g>
+                <g class="flame-wrapper">
+                  <circle class="flame-glow" cx="221" cy="60" r="24" fill="url(#flameAura)"/>
+                  <path class="flame-outer" style="animation-delay:0.45s" d="M221 38 C228 50 232 61 228 69 C225 74 217 74 214 69 C210 61 214 50 221 38 Z" fill="url(#flameOuterGrad)"/>
+                  <path class="flame-inner" style="animation-delay:0.3s" d="M221 50 C224.5 57 226 63 224 67 C222.5 70 219.5 70 218 67 C216 63 217.5 57 221 50 Z" fill="#ffffff"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Mensaje especial cuando se apagan las 3 velas -->
+          <div id="wish-granted-box" class="hidden my-5 p-5 rounded-2xl bg-gradient-to-r from-goldWarm/15 via-roseSoft/15 to-goldWarm/15 border border-goldWarm/45 transition-all duration-700">
+            <p class="font-serif italic text-xl sm:text-2xl text-goldWarm leading-relaxed">
+              “¡Deseo pedido! Que todos tus sueños se hagan realidad, mi mensa hermosa 💖”
+            </p>
+          </div>
+
+          <!-- Botones del Pastel -->
+          <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
+            <button
+              id="blow-candles-btn"
+              type="button"
+              class="btn-gold px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer"
+            >
+              Soplar las velas 🌬️✨
+            </button>
+
+            <button
+              id="relight-candles-btn"
+              type="button"
+              class="hidden px-6 py-3.5 rounded-full glass-panel text-goldWarm hover:bg-goldWarm/15 border border-goldWarm/40 text-sm sm:text-base font-semibold transition-all cursor-pointer"
+            >
+              Volver a encender las velas 
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         4. CARTA DE AMOR INTERACTIVA (SOBRE 3D CON SELLO DE LACRE)
+         ========================================================== -->
+    <section id="seccion-carta" class="reveal-on-scroll relative py-16 sm:py-24 px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <span class="inline-block text-xs sm:text-sm uppercase tracking-[0.25em] text-goldWarm/90 font-semibold mb-2">
+          UwU
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-bold mb-3">
+          Una carta para ti 💌
+        </h2>
+        <p class="text-sm sm:text-base text-purple-100/75 max-w-md mx-auto mb-12">
+          Toca el sobre dorado para romper el sello y leer lo que guardé para tu día especial.
+        </p>
+
+        <!-- Sobre 3D Interactivo -->
+        <div class="envelope-stage py-4">
+          <div
+            id="love-envelope"
+            class="envelope-container"
+            role="button"
+            tabindex="0"
+            aria-label="Abrir carta de cumpleaños para Annie mi mensa"
+          >
+            <!-- Fondo del sobre -->
+            <div class="envelope-back"></div>
+
+            <!-- Papel asomándose -->
+            <div class="envelope-letter-peek">
+              <span class="font-script text-2xl sm:text-3xl text-rose-500">Para ti...</span>
+              <span class="mt-2 h-0.5 w-16 bg-amber-400/60 rounded-full"></span>
+              <span class="mt-3 text-xs tracking-widest uppercase text-amber-800/70 font-semibold">Feliz Cumpleaños</span>
+            </div>
+
+            <!-- Bolsillo frontal con dedicatoria -->
+            <div class="envelope-pocket flex flex-col items-center justify-end pb-5">
+              <span class="relative z-10 text-[11px] uppercase tracking-[0.22em] text-goldWarm/75 font-semibold">
+                Para:
+              </span>
+              <span class="relative z-10 font-script text-3xl sm:text-4xl text-goldWarm drop-shadow-[0_2px_10px_rgba(255,209,102,0.45)]">
+                Annie mi esposita
+              </span>
+            </div>
+
+            <!-- Solapa superior -->
+            <div class="envelope-flap">
+              <div class="envelope-flap-shape"></div>
+            </div>
+
+            <!-- Sello de lacre dorado con corazón -->
+            <div class="wax-seal" aria-hidden="true">
+              <svg class="w-7 h-7 text-rose-800 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <button
+          id="open-letter-btn"
+          type="button"
+          class="mt-8 px-6 py-3 rounded-full glass-panel text-goldWarm hover:bg-goldWarm/15 border border-goldWarm/40 text-sm sm:text-base font-semibold transition-all cursor-pointer"
+        >
+          Abrir mi carta ✨
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         5. CONSTELACIÓN DE DESEOS / TARJETAS INTERACTIVAS (6 CARDS)
+         ========================================================== -->
+    <section id="seccion-tarjetas" class="reveal-on-scroll relative py-16 sm:py-24 px-4 sm:px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-xs sm:text-sm uppercase tracking-[0.25em] text-goldWarm/90 font-semibold mb-2">
+            Constelación de Amor
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-bold mb-3">
+            Pequeñas cosas que amo de ti
+          </h2>
+          <p class="text-sm sm:text-base text-purple-100/75 max-w-lg mx-auto">
+            Toca o pasa el cursor sobre cada estrella para descubrir seis razones por las que haces mi mundo mucho más bonito.
+          </p>
+          <p id="cards-counter" class="mt-4 inline-block px-4 py-1.5 rounded-full bg-goldWarm/10 border border-goldWarm/30 text-xs sm:text-sm text-goldWarm font-semibold">
+            ✨ 0 de 6 destellos descubiertos
+          </p>
+        </div>
+
+        <!-- Cuadrícula responsiva de 6 tarjetas 3D -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Tarjeta 1 -->
+          <div class="flip-card" data-card="1" role="button" tabindex="0" aria-label="Tarjeta 1: Tu sonrisa">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="w-14 h-14 rounded-full bg-goldWarm/15 border border-goldWarm/45 flex items-center justify-center text-2xl mb-4 shadow-[0_0_20px_rgba(255,209,102,0.2)]">
+                  😊
+                </div>
+                <h3 class="font-serif text-xl text-goldWarm font-semibold mb-1">Tu sonrisa</h3>
+                <span class="text-xs text-purple-200/70 tracking-wider uppercase mt-2">Toca para descubrir ✨</span>
+              </div>
+              <div class="flip-card-back">
+                <span class="text-goldWarm text-lg mb-2">✨</span>
+                <p class="text-sm sm:text-base text-amber-50 leading-relaxed font-medium">
+                  Tienes la sonrisa más bonita del universo. No importa qué tan pesado haya sido el día, verte sonreír me reinicia el windows.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2 -->
+          <div class="flip-card" data-card="2" role="button" tabindex="0" aria-label="Tarjeta 2: Tus ocurrencias de mensa">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="w-14 h-14 rounded-full bg-roseSoft/15 border border-roseSoft/45 flex items-center justify-center text-2xl mb-4 shadow-[0_0_20px_rgba(255,117,143,0.22)]">
+                  🤭
+                </div>
+                <h3 class="font-serif text-xl text-goldWarm font-semibold mb-1">Tus momentos de “mensa”</h3>
+                <span class="text-xs text-purple-200/70 tracking-wider uppercase mt-2">Toca para descubrir ✨</span>
+              </div>
+              <div class="flip-card-back">
+                <span class="text-roseSoft text-lg mb-2">💖</span>
+                <p class="text-sm sm:text-base text-amber-50 leading-relaxed font-medium">
+                  Amo todas tus ocurrencias, tus malos chistes, nuestras referencias, y esas cositas que me hacen rerir y me enamoran cada día un poquito más.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3 -->
+          <div class="flip-card" data-card="3" role="button" tabindex="0" aria-label="Tarjeta 3: Tu luz">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="w-14 h-14 rounded-full bg-goldWarm/15 border border-goldWarm/45 flex items-center justify-center text-2xl mb-4 shadow-[0_0_20px_rgba(255,209,102,0.2)]">
+                  🌟
+                </div>
+                <h3 class="font-serif text-xl text-goldWarm font-semibold mb-1">Cómo iluminas mis días</h3>
+                <span class="text-xs text-purple-200/70 tracking-wider uppercase mt-2">Toca para descubrir ✨</span>
+              </div>
+              <div class="flip-card-back">
+                <span class="text-goldWarm text-lg mb-2">✨</span>
+                <p class="text-sm sm:text-base text-amber-50 leading-relaxed font-medium">
+                  Aunque no lo creas siempre despierto de mal humor, pero cuando estoy contigo en persona por alguna razon despierto feliz y enamorado.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 4 -->
+          <div class="flip-card" data-card="4" role="button" tabindex="0" aria-label="Tarjeta 4: Tu corazón">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="w-14 h-14 rounded-full bg-roseSoft/15 border border-roseSoft/45 flex items-center justify-center text-2xl mb-4 shadow-[0_0_20px_rgba(255,117,143,0.22)]">
+                  💛
+                </div>
+                <h3 class="font-serif text-xl text-goldWarm font-semibold mb-1">Tu pancita</h3>
+                <span class="text-xs text-purple-200/70 tracking-wider uppercase mt-2">Toca para descubrir ✨</span>
+              </div>
+              <div class="flip-card-back">
+                <span class="text-roseSoft text-lg mb-2">💖</span>
+                <p class="text-sm sm:text-base text-amber-50 leading-relaxed font-medium">
+                  Soy feli de que me dejes tocar tu pancita, antes odiabas que lo haga, pero es mi forma de decir te quiero <3.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 5 -->
+          <div class="flip-card" data-card="5" role="button" tabindex="0" aria-label="Tarjeta 5: Nuestras aventuras">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="w-14 h-14 rounded-full bg-goldWarm/15 border border-goldWarm/45 flex items-center justify-center text-2xl mb-4 shadow-[0_0_20px_rgba(255,209,102,0.2)]">
+                  🌙
+                </div>
+                <h3 class="font-serif text-xl text-goldWarm font-semibold mb-1">Cada aventura juntos</h3>
+                <span class="text-xs text-purple-200/70 tracking-wider uppercase mt-2">Toca para descubrir ✨</span>
+              </div>
+              <div class="flip-card-back">
+                <span class="text-goldWarm text-lg mb-2">✨</span>
+                <p class="text-sm sm:text-base text-amber-50 leading-relaxed font-medium">
+                  Siempre terminamos haciendo locuras, fake ubicacion, hacerlo en publico, juzgar gente... Lo bonito es hacerlo contigo.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 6 -->
+          <div class="flip-card" data-card="6" role="button" tabindex="0" aria-label="Tarjeta 6: Simplemente ser tú">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="w-14 h-14 rounded-full bg-roseSoft/15 border border-roseSoft/45 flex items-center justify-center text-2xl mb-4 shadow-[0_0_20px_rgba(255,117,143,0.22)]">
+                  👑
+                </div>
+                <h3 class="font-serif text-xl text-goldWarm font-semibold mb-1">Simplemente ser tú</h3>
+                <span class="text-xs text-purple-200/70 tracking-wider uppercase mt-2">Toca para descubrir ✨</span>
+              </div>
+              <div class="flip-card-back">
+                <span class="text-roseSoft text-lg mb-2">💖</span>
+                <p class="text-sm sm:text-base text-amber-50 leading-relaxed font-medium">
+                  No cambiaría ni un solo detalle de ti (mi borraaachaa). Gracias por ser mi compañera y por ser siempre mi esposita.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         6. CIERRE Y BOTÓN INTERACTIVO FINAL ("LANZAR UN DESEO AL CIELO")
+         ========================================================== -->
+    <section id="seccion-final" class="reveal-on-scroll relative pt-14 pb-24 px-4 sm:px-6 text-center">
+      <div class="max-w-3xl mx-auto glass-panel rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+        <div class="pointer-events-none absolute -bottom-24 left-1/2 -translate-x-1/2 w-96 h-64 rounded-full bg-roseSoft/15 blur-3xl"></div>
+
+        <p class="text-xs sm:text-sm uppercase tracking-[0.26em] text-goldWarm/85 font-semibold mb-3">
+          Llenemos la noche de magia
+        </p>
+
+        <h2 class="font-serif text-3xl sm:text-4xl text-white font-bold mb-4">
+          Lanza tus deseos al cielo estrellado
+        </h2>
+
+        <p class="text-sm sm:text-base text-purple-100/80 max-w-md mx-auto mb-8 leading-relaxed">
+          Solo preciona.
+        </p>
+
+        <button
+          id="launch-wish-btn"
+          type="button"
+          class="btn-gold px-8 py-4 rounded-full text-base sm:text-lg cursor-pointer"
+        >
+          Lanzar un deseo al cielo 🏮✨
+        </button>
+
+        <p id="lantern-counter" class="mt-4 text-xs sm:text-sm text-goldWarm/80 min-h-[1.25rem]"></p>
+
+        <!-- Separador romántico -->
+        <div class="my-10 flex items-center justify-center gap-3">
+          <span class="h-px w-16 sm:w-28 bg-gradient-to-r from-transparent to-goldWarm/50"></span>
+          <span class="text-goldWarm text-lg">✦</span>
+          <span class="h-px w-16 sm:w-28 bg-gradient-to-l from-transparent to-goldWarm/50"></span>
+        </div>
+
+        <!-- Cierre tierno -->
+        <p class="font-script text-4xl sm:text-5xl md:text-6xl text-goldWarm drop-shadow-[0_0_20px_rgba(255,209,102,0.4)] leading-tight mb-3">
+          Feliz cumpleaños, Mi esposita.
+        </p>
+        <p class="font-serif italic text-xl sm:text-2xl text-roseGlow">
+          Te quiero,amo, adoro, deseo muchísimo. 💖
+        </p>
+      </div>
+
+      <footer class="mt-10 text-xs text-purple-200/50 tracking-wider">
+        Hecho para la fan #1 del rubius ✨
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       MODAL DE LA CARTA DESPLEGADA (LECTURA CÓMODA EN MÓVIL Y PC)
+       ============================================================ -->
+  <div id="letter-modal" role="dialog" aria-modal="true" aria-labelledby="letter-title">
+    <div class="letter-paper p-6 sm:p-10 md:p-12">
+      <!-- Botón cerrar -->
+      <button
+        id="close-letter-x"
+        type="button"
+        aria-label="Cerrar carta"
+        class="absolute top-4 right-4 w-10 h-10 rounded-full bg-amber-900/10 hover:bg-amber-900/20 text-amber-950 flex items-center justify-center text-lg font-bold transition-colors cursor-pointer"
+      >
+        ✕
+      </button>
+
+      <!-- Encabezado floral sutil -->
+      <div class="text-center mb-6">
+        <span class="inline-block text-xs uppercase tracking-[0.28em] text-amber-700/80 font-bold mb-2">
+          ✦ Para mi persona favorita ✦
+        </span>
+        <h3 id="letter-title" class="font-script text-4xl sm:text-5xl text-rose-600 leading-tight">
+          Annie mi mensa,
+        </h3>
+      </div>
+
+      <!-- Contenido de la carta -->
+      <div class="space-y-4 text-sm sm:text-base md:text-[17px] leading-relaxed text-[#422739] font-medium">
+        <p>
+          ¡Feliz cumpleaños, mi vida! Hoy es un día súper especial porque ya tienes mi edad xd. Mentira. Gracias por estar otro año conmigo.
+        </p>
+        <p>
+          Aunque siempre te diga de cariño <strong>“amor”</strong>, la verdad es que  la palabra me queda corta con todo lo que siento por ti. Realmente me diste la oportunidad mas linda del mundo. Jamas pense que estaria con una niña que me gusto desde que la vi. 
+        </p>
+        <p>
+          Realmente quiero estar en tu vida pase lo que pase para poder coleccionar besitos, mimitos, locuras y recuerdos bonitos juntitos.
+        </p>
+        <p>
+          Gracias por dejarme ser tu esposito, por compartir tus días conmigo y por hacerme cada dia menos horrible. Te debo un ramen.
+        </p>
+      </div>
+
+      <!-- Firma -->
+      <div class="mt-8 pt-5 border-t border-amber-700/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-center sm:text-left">
+          <p class="font-serif italic text-amber-900 text-base">Con todo mi amor,</p>
+          <p class="font-script text-3xl text-rose-600 mt-0.5">Tu Ethyn</p>
+        </div>
+
+        <button
+          id="close-letter-btn"
+          type="button"
+          class="btn-gold px-6 py-2.5 rounded-full text-sm cursor-pointer"
+        >
+          Guardar en el sobre 💌 
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TOAST FLOTANTE PARA NOTIFICACIONES SUAVES
+       ============================================================ -->
+  <div id="toast-message" class="px-5 py-3 rounded-full glass-panel border-goldWarm/55 text-goldWarm text-xs sm:text-sm font-semibold shadow-2xl text-center max-w-[90vw]">
+    ✨ ¡Mensaje especial!
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT: CANVAS MÁGICO + MÚSICA WEB AUDIO + INTERACCIONES
+       ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ============================================================
+         1. SISTEMA DE NOTIFICACIONES SUAVES (TOAST)
+         ============================================================ */
+      const toastEl = document.getElementById('toast-message');
+      let toastTimer = null;
+
+      function showToast(text, duration = 3200) {
+        if (!toastEl) return;
+        toastEl.textContent = text;
+        toastEl.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastEl.classList.remove('show');
+        }, duration);
+      }
+
+      /* ============================================================
+         2. CAJA DE MÚSICA ROMÁNTICA CON WEB AUDIO API
+            Melodía dulce de "Feliz Cumpleaños" sin archivos externos
+         ============================================================ */
+      class RomanticMusicBox {
+        constructor() {
+          this.ctx = null;
+          this.isPlaying = false;
+          this.timerId = null;
+          this.noteIndex = 0;
+
+          // Frecuencias en Hz (Tonalidad cálida de Sol Mayor / Fa Mayor suave)
+          const N = {
+            C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+            G4: 392.00, A4: 440.00, Bb4: 466.16, B4: 493.88,
+            C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99
+          };
+
+          // Melodía de "Feliz Cumpleaños" con duración en beats y acompañamiento suave
+          this.melody = [
+            { f: N.C4, b: 0.75, h: N.C5 }, { f: N.C4, b: 0.25 }, { f: N.D4, b: 1.0, h: N.F4 }, { f: N.C4, b: 1.0 }, { f: N.F4, b: 1.0, h: N.A4 }, { f: N.E4, b: 2.0, h: N.G4 },
+            { f: N.C4, b: 0.75, h: N.C5 }, { f: N.C4, b: 0.25 }, { f: N.D4, b: 1.0, h: N.G4 }, { f: N.C4, b: 1.0 }, { f: N.G4, b: 1.0, h: N.Bb4 }, { f: N.F4, b: 2.0, h: N.A4 },
+            { f: N.C4, b: 0.75, h: N.F4 }, { f: N.C4, b: 0.25 }, { f: N.C5, b: 1.0, h: N.A4 }, { f: N.A4, b: 1.0, h: N.F4 }, { f: N.F4, b: 1.0, h: N.C5 }, { f: N.E4, b: 1.0, h: N.G4 }, { f: N.D4, b: 1.6, h: N.Bb4 },
+            { f: N.Bb4, b: 0.75, h: N.D5 }, { f: N.Bb4, b: 0.25 }, { f: N.A4, b: 1.0, h: N.C5 }, { f: N.F4, b: 1.0, h: N.A4 }, { f: N.G4, b: 1.0, h: N.Bb4 }, { f: N.F4, b: 2.6, h: N.C5 },
+            { f: 0, b: 2.2 } // Pausa respiratoria suave antes de repetir
+          ];
+
+          this.beatDurationMs = 520; // Tempo dulce y tranquilo
+        }
+
+        initContext() {
+          try {
+            if (!this.ctx) {
+              const AudioCtx = window.AudioContext || window.webkitAudioContext;
+              if (AudioCtx) {
+                this.ctx = new AudioCtx();
+              }
+            }
+            if (this.ctx && this.ctx.state === 'suspended') {
+              this.ctx.resume();
+            }
+          } catch (err) {
+            console.warn('Web Audio no disponible:', err);
+          }
+        }
+
+        // Sintetiza una nota cristalina estilo cajita de música
+        playBell(freq, durationSec = 1.6, volume = 0.085) {
+          if (!this.ctx || !freq) return;
+          try {
+            const now = this.ctx.currentTime;
+
+            // Oscilador principal (tono puro cálido)
+            const osc1 = this.ctx.createOscillator();
+            osc1.type = 'sine';
+            osc1.frequency.setValueAtTime(freq * 2, now); // Octava superior estilo music box
+
+            // Armónico cristalino sutil
+            const osc2 = this.ctx.createOscillator();
+            osc2.type = 'triangle';
+            osc2.frequency.setValueAtTime(freq * 4, now);
+
+            const gain1 = this.ctx.createGain();
+            const gain2 = this.ctx.createGain();
+
+            gain1.gain.setValueAtTime(0.0001, now);
+            gain1.gain.linearRampToValueAtTime(volume, now + 0.015);
+            gain1.gain.exponentialRampToValueAtTime(0.0001, now + durationSec);
+
+            gain2.gain.setValueAtTime(0.0001, now);
+            gain2.gain.linearRampToValueAtTime(volume * 0.22, now + 0.01);
+            gain2.gain.exponentialRampToValueAtTime(0.0001, now + durationSec * 0.45);
+
+            osc1.connect(gain1);
+            osc2.connect(gain2);
+            gain1.connect(this.ctx.destination);
+            gain2.connect(this.ctx.destination);
+
+            osc1.start(now);
+            osc2.start(now);
+            osc1.stop(now + durationSec + 0.05);
+            osc2.stop(now + durationSec * 0.5 + 0.05);
+          } catch (e) {
+            // Silencio seguro si el navegador bloquea el audio
+          }
+        }
+
+        // Acorde mágico breve para celebraciones (velas, linternas, sorpresa)
+        playMagicChime() {
+          if (!this.isPlaying) return;
+          this.initContext();
+          const notes = [523.25, 659.25, 783.99, 1046.5];
+          notes.forEach((n, idx) => {
+            setTimeout(() => this.playBell(n * 0.5, 1.3, 0.06), idx * 90);
+          });
+        }
+
+        scheduleNext() {
+          if (!this.isPlaying) return;
+          const step = this.melody[this.noteIndex];
+          if (step.f > 0) {
+            this.playBell(step.f, 1.75, 0.08);
+            if (step.h) {
+              this.playBell(step.h * 0.5, 1.9, 0.032);
+            }
+          }
+          this.noteIndex = (this.noteIndex + 1) % this.melody.length;
+          this.timerId = setTimeout(() => this.scheduleNext(), step.b * this.beatDurationMs);
+        }
+
+        start() {
+          this.initContext();
+          if (this.isPlaying) return;
+          this.isPlaying = true;
+          this.noteIndex = 0;
+          this.scheduleNext();
+        }
+
+        stop() {
+          this.isPlaying = false;
+          clearTimeout(this.timerId);
+        }
+
+        toggle() {
+          if (this.isPlaying) {
+            this.stop();
+          } else {
+            this.start();
+          }
+          return this.isPlaying;
+        }
+      }
+
+      const musicBox = new RomanticMusicBox();
+
+      /* ============================================================
+         3. MOTOR DE CANVAS INTERACTIVO (60 FPS)
+            Estrellas, estrellas fugaces, luciérnagas doradas, pétalos,
+            linternas flotantes, corazones, confeti y fuegos artificiales
+         ============================================================ */
+      const canvas = document.getElementById('magic-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      const stars = [];
+      const shootingStars = [];
+      const fireflies = [];
+      const petals = [];
+      const fireworks = [];
+      const confetti = [];
+      const lanterns = [];
+      const risingHearts = [];
+
+      const PALETTE = ['#ffd166', '#f4b942', '#ff758f', '#ffb3c6', '#fff2b2', '#ffffff'];
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initAmbientEntities();
+      }
+
+      function random(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function initAmbientEntities() {
+        stars.length = 0;
+        fireflies.length = 0;
+        petals.length = 0;
+
+        const isMobile = width < 640;
+        const starCount = isMobile ? 85 : 155;
+        const fireflyCount = isMobile ? 18 : 32;
+        const petalCount = isMobile ? 12 : 22;
+
+        // Estrellas parpadeantes
+        for (let i = 0; i < starCount; i++) {
+          stars.push({
+            x: random(0, width),
+            y: random(0, height),
+            r: random(0.6, 2.1),
+            phase: random(0, Math.PI * 2),
+            speed: random(0.012, 0.038),
+            tint: Math.random() > 0.78 ? '#ffd166' : (Math.random() > 0.85 ? '#ff9eb5' : '#ffffff')
+          });
+        }
+
+        // Luciérnagas doradas suaves
+        for (let i = 0; i < fireflyCount; i++) {
+          fireflies.push({
+            x: random(0, width),
+            y: random(0, height),
+            r: random(1.8, 3.6),
+            vx: random(-0.35, 0.35),
+            vy: random(-0.4, -0.1),
+            phase: random(0, Math.PI * 2),
+            speed: random(0.02, 0.05)
+          });
+        }
+
+        // Pétalos dorados/amarillos flotantes
+        for (let i = 0; i < petalCount; i++) {
+          petals.push({
+            x: random(0, width),
+            y: random(0, height),
+            size: random(5, 10),
+            vx: random(-0.35, 0.45),
+            vy: random(0.28, 0.72),
+            rot: random(0, Math.PI * 2),
+            rotSpeed: random(-0.025, 0.025),
+            sway: random(0, Math.PI * 2),
+            color: Math.random() > 0.35 ? 'rgba(255, 209, 102, 0.48)' : 'rgba(255, 158, 181, 0.42)'
+          });
+        }
+      }
+
+      // Explosión de fuegos artificiales dorados y rosas
+      function createFirework(x, y, intensity = 1) {
+        const count = Math.floor(random(34, 52) * intensity);
+        const primaryColor = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+
+        for (let i = 0; i < count; i++) {
+          const angle = (Math.PI * 2 * i) / count + random(-0.15, 0.15);
+          const speed = random(1.8, 6.2) * Math.sqrt(intensity);
+          fireworks.push({
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            alpha: 1,
+            decay: random(0.012, 0.024),
+            size: random(1.6, 3.6),
+            color: Math.random() > 0.35 ? primaryColor : PALETTE[Math.floor(Math.random() * PALETTE.length)],
+            gravity: 0.055,
+            drag: 0.965
+          });
+        }
+
+        // Anillo luminoso expansivo
+        fireworks.push({
+          ring: true,
+          x,
+          y,
+          radius: 4,
+          maxRadius: 58 * intensity,
+          alpha: 0.65,
+          color: primaryColor
+        });
+      }
+
+      // Lluvia de confeti brillante dorado y rosa
+      function createConfettiBurst(x, y, amount = 40) {
+        for (let i = 0; i < amount; i++) {
+          confetti.push({
+            x,
+            y,
+            vx: random(-5.5, 5.5),
+            vy: random(-7.5, -2.0),
+            w: random(5, 9),
+            h: random(3, 6),
+            rot: random(0, Math.PI * 2),
+            rotSpeed: random(-0.18, 0.18),
+            alpha: 1,
+            color: PALETTE[Math.floor(Math.random() * PALETTE.length)]
+          });
+        }
+      }
+
+      // Celebración grande con múltiples fuegos artificiales
+      function launchCelebrationShow() {
+        const positions = [
+          [width * 0.25, height * 0.30],
+          [width * 0.75, height * 0.28],
+          [width * 0.50, height * 0.22],
+          [width * 0.35, height * 0.45],
+          [width * 0.68, height * 0.42]
+        ];
+        positions.forEach(([px, py], i) => {
+          setTimeout(() => {
+            createFirework(px, py, 1.15);
+            createConfettiBurst(px, py, 20);
+          }, i * 240);
+        });
+      }
+
+      // Lanzar linternas flotantes doradas + lluvia de corazones hacia arriba
+      function launchWishLanterns() {
+        const count = width < 640 ? 4 : 6;
+        for (let i = 0; i < count; i++) {
+          lanterns.push({
+            x: random(width * 0.12, width * 0.88),
+            y: height + random(20, 120),
+            vy: random(-1.05, -1.75),
+            swayPhase: random(0, Math.PI * 2),
+            swaySpeed: random(0.015, 0.03),
+            scale: random(0.72, 1.15),
+            glowPhase: random(0, Math.PI * 2)
+          });
+        }
+
+        // Corazones y estrellitas ascendiendo
+        for (let i = 0; i < 18; i++) {
+          risingHearts.push({
+            x: random(width * 0.1, width * 0.9),
+            y: height + random(10, 90),
+            vy: random(-1.6, -3.4),
+            vx: random(-0.5, 0.5),
+            size: random(10, 20),
+            alpha: 1,
+            isStar: Math.random() > 0.55,
+            color: Math.random() > 0.45 ? '#ff758f' : '#ffd166',
+            phase: random(0, Math.PI * 2)
+          });
+        }
+      }
+
+      function drawHeartShape(c, x, y, size, color, alpha) {
+        c.save();
+        c.globalAlpha = alpha;
+        c.fillStyle = color;
+        c.translate(x, y);
+        const s = size / 16;
+        c.scale(s, s);
+        c.beginPath();
+        c.moveTo(0, 5);
+        c.bezierCurveTo(-10, -4, -14, -14, -5, -14);
+        c.bezierCurveTo(-1, -14, 0, -10, 0, -9);
+        c.bezierCurveTo(0, -10, 1, -14, 5, -14);
+        c.bezierCurveTo(14, -14, 10, -4, 0, 5);
+        c.closePath();
+        c.fill();
+        c.restore();
+      }
+
+      function drawLantern(c, l) {
+        c.save();
+        c.translate(l.x, l.y);
+        c.scale(l.scale, l.scale);
+
+        const flicker = 0.88 + Math.sin(l.glowPhase) * 0.12;
+
+        // Halo cálido exterior
+        const halo = c.createRadialGradient(0, 0, 4, 0, 0, 44);
+        halo.addColorStop(0, `rgba(255, 209, 102, ${0.42 * flicker})`);
+        halo.addColorStop(0.55, `rgba(255, 140, 66, ${0.14 * flicker})`);
+        halo.addColorStop(1, 'rgba(255, 209, 102, 0)');
+        c.fillStyle = halo;
+        c.beginPath();
+        c.arc(0, 0, 44, 0, Math.PI * 2);
+        c.fill();
+
+        // Cuerpo de la linterna de papel
+        const bodyGrad = c.createLinearGradient(0, -22, 0, 20);
+        bodyGrad.addColorStop(0, '#ff8f4c');
+        bodyGrad.addColorStop(0.55, '#ffd166');
+        bodyGrad.addColorStop(1, '#fff6cc');
+
+        c.fillStyle = bodyGrad;
+        c.beginPath();
+        c.moveTo(-13, -18);
+        c.quadraticCurveTo(0, -24, 13, -18);
+        c.quadraticCurveTo(17, 0, 10, 18);
+        c.lineTo(-10, 18);
+        c.quadraticCurveTo(-17, 0, -13, -18);
+        c.closePath();
+        c.fill();
+
+        // Brillo interior (flama)
+        c.fillStyle = `rgba(255, 255, 255, ${0.85 * flicker})`;
+        c.beginPath();
+        c.arc(0, 9, 4.5, 0, Math.PI * 2);
+        c.fill();
+
+        // Borde inferior sutil
+        c.strokeStyle = 'rgba(130, 60, 20, 0.55)';
+        c.lineWidth = 1.4;
+        c.beginPath();
+        c.moveTo(-9, 18);
+        c.lineTo(9, 18);
+        c.stroke();
+
+        c.restore();
+      }
+
+      // Bucle principal de animación 60 FPS
+      function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+
+        // 1. Estrellas parpadeantes
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          s.phase += s.speed;
+          const alpha = 0.25 + (Math.sin(s.phase) * 0.5 + 0.5) * 0.75;
+          ctx.fillStyle = s.tint;
+          ctx.globalAlpha = alpha;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        // Estrellas fugaces ocasionales
+        if (Math.random() < 0.004 && shootingStars.length < 2) {
+          shootingStars.push({
+            x: random(width * 0.1, width * 0.9),
+            y: random(0, height * 0.35),
+            vx: random(7, 11),
+            vy: random(3, 5.5),
+            len: random(65, 110),
+            alpha: 1
+          });
+        }
+
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+          const st = shootingStars[i];
+          st.x += st.vx;
+          st.y += st.vy;
+          st.alpha -= 0.022;
+          if (st.alpha <= 0) {
+            shootingStars.splice(i, 1);
+            continue;
+          }
+          const grad = ctx.createLinearGradient(st.x, st.y, st.x - st.vx * 8, st.y - st.vy * 8);
+          grad.addColorStop(0, `rgba(255, 240, 190, ${st.alpha})`);
+          grad.addColorStop(1, 'rgba(255, 209, 102, 0)');
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(st.x, st.y);
+          ctx.lineTo(st.x - st.vx * 8, st.y - st.vy * 8);
+          ctx.stroke();
+        }
+
+        // 2. Luciérnagas doradas
+        for (let i = 0; i < fireflies.length; i++) {
+          const f = fireflies[i];
+          f.phase += f.speed;
+          f.x += f.vx + Math.sin(f.phase * 0.7) * 0.25;
+          f.y += f.vy;
+
+          if (f.y < -15) { f.y = height + 15; f.x = random(0, width); }
+          if (f.x < -15) f.x = width + 15;
+          if (f.x > width + 15) f.x = -15;
+
+          const glow = 0.25 + (Math.sin(f.phase) * 0.5 + 0.5) * 0.75;
+          const grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 4.2);
+          grad.addColorStop(0, `rgba(255, 226, 138, ${glow})`);
+          grad.addColorStop(0.5, `rgba(255, 190, 85, ${glow * 0.35})`);
+          grad.addColorStop(1, 'rgba(255, 209, 102, 0)');
+
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, f.r * 4.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // 3. Pétalos suaves flotantes
+        for (let i = 0; i < petals.length; i++) {
+          const p = petals[i];
+          p.sway += 0.02;
+          p.x += p.vx + Math.sin(p.sway) * 0.4;
+          p.y += p.vy;
+          p.rot += p.rotSpeed;
+
+          if (p.y > height + 20) {
+            p.y = -20;
+            p.x = random(0, width);
+          }
+          if (p.x > width + 20) p.x = -20;
+          if (p.x < -20) p.x = width + 20;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size, p.size * 0.52, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // 4. Linternas flotantes doradas
+        for (let i = lanterns.length - 1; i >= 0; i--) {
+          const l = lanterns[i];
+          l.swayPhase += l.swaySpeed;
+          l.glowPhase += 0.08;
+          l.x += Math.sin(l.swayPhase) * 0.55;
+          l.y += l.vy;
+          drawLantern(ctx, l);
+          if (l.y < -80) {
+            lanterns.splice(i, 1);
+          }
+        }
+
+        // 5. Corazones y estrellitas ascendiendo
+        for (let i = risingHearts.length - 1; i >= 0; i--) {
+          const h = risingHearts[i];
+          h.phase += 0.05;
+          h.x += h.vx + Math.sin(h.phase) * 0.6;
+          h.y += h.vy;
+          h.alpha -= 0.0055;
+          if (h.alpha <= 0 || h.y < -40) {
+            risingHearts.splice(i, 1);
+            continue;
+          }
+          if (h.isStar) {
+            ctx.save();
+            ctx.globalAlpha = h.alpha;
+            ctx.fillStyle = h.color;
+            ctx.font = `${h.size}px serif`;
+            ctx.fillText('✦', h.x, h.y);
+            ctx.restore();
+          } else {
+            drawHeartShape(ctx, h.x, h.y, h.size, h.color, h.alpha);
+          }
+        }
+
+        // 6. Fuegos artificiales
+        for (let i = fireworks.length - 1; i >= 0; i--) {
+          const fw = fireworks[i];
+          if (fw.ring) {
+            fw.radius += (fw.maxRadius - fw.radius) * 0.14;
+            fw.alpha -= 0.032;
+            if (fw.alpha <= 0) {
+              fireworks.splice(i, 1);
+              continue;
+            }
+            ctx.save();
+            ctx.globalAlpha = fw.alpha;
+            ctx.strokeStyle = fw.color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(fw.x, fw.y, fw.radius, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.restore();
+          } else {
+            fw.vx *= fw.drag;
+            fw.vy *= fw.drag;
+            fw.vy += fw.gravity;
+            fw.x += fw.vx;
+            fw.y += fw.vy;
+            fw.alpha -= fw.decay;
+
+            if (fw.alpha <= 0) {
+              fireworks.splice(i, 1);
+              continue;
+            }
+            ctx.save();
+            ctx.globalAlpha = fw.alpha;
+            ctx.fillStyle = fw.color;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = fw.color;
+            ctx.beginPath();
+            ctx.arc(fw.x, fw.y, fw.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+        }
+
+        // 7. Confeti dorado y rosa
+        for (let i = confetti.length - 1; i >= 0; i--) {
+          const c = confetti[i];
+          c.vx *= 0.98;
+          c.vy += 0.14;
+          c.x += c.vx;
+          c.y += c.vy;
+          c.rot += c.rotSpeed;
+          c.alpha -= 0.008;
+
+          if (c.alpha <= 0 || c.y > height + 30) {
+            confetti.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = c.alpha;
+          ctx.translate(c.x, c.y);
+          ctx.rotate(c.rot);
+          ctx.fillStyle = c.color;
+          ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+          ctx.restore();
+        }
+
+        requestAnimationFrame(animateCanvas);
+      }
+
+      /* ============================================================
+         4. INTERACCIONES DE LA PÁGINA
+         ============================================================ */
+      window.addEventListener('resize', resizeCanvas);
+
+      window.onload = function () {
+        resizeCanvas();
+        animateCanvas();
+      };
+
+      // Clic en cualquier parte del cielo para lanzar fuegos artificiales
+      document.addEventListener('click', (e) => {
+        const interactiveTarget = e.target.closest('button, a, .candle-group, .flip-card, #love-envelope, .letter-paper');
+        if (interactiveTarget) return;
+        const intro = document.getElementById('intro-curtain');
+        if (intro && !intro.classList.contains('hidden-curtain')) return;
+        createFirework(e.clientX, e.clientY, 0.95);
+      });
+
+      // ----- 1) Cortina de bienvenida y música -----
+      const introCurtain = document.getElementById('intro-curtain');
+      const mainContent = document.getElementById('main-content');
+      const openSurpriseBtn = document.getElementById('open-surprise-btn');
+      const musicToggleBtn = document.getElementById('music-toggle');
+      const musicIcon = document.getElementById('music-icon');
+      const musicLabel = document.getElementById('music-label');
+
+      function updateMusicUI(playing) {
+        musicIcon.textContent = playing ? '🎵' : '🔇';
+        musicLabel.textContent = playing ? 'Música: ON' : 'Música: OFF';
+      }
+
+      openSurpriseBtn.addEventListener('click', () => {
+        // Inicia cajita de música suave
+        musicBox.start();
+        updateMusicUI(true);
+
+        // Oculta cortina y revela contenido
+        introCurtain.classList.add('hidden-curtain');
+        mainContent.classList.add('revealed');
+        musicToggleBtn.classList.remove('hidden');
+        musicToggleBtn.classList.add('flex');
+
+        // Explosión mágica de bienvenida
+        createFirework(width * 0.5, height * 0.35, 1.3);
+        createConfettiBurst(width * 0.5, height * 0.45, 55);
+        setTimeout(() => createFirework(width * 0.25, height * 0.28, 1.0), 320);
+        setTimeout(() => createFirework(width * 0.75, height * 0.28, 1.0), 560);
+      });
+
+      musicToggleBtn.addEventListener('click', () => {
+        const active = musicBox.toggle();
+        updateMusicUI(active);
+        showToast(active ? '🎵 Melodía activada' : '🔇 Melodía en silencio', 1800);
+      });
+
+      // ----- 2) Pastel de cumpleaños interactivo -----
+      const candleGroups = Array.from(document.querySelectorAll('.candle-group'));
+      const blowCandlesBtn = document.getElementById('blow-candles-btn');
+      const relightCandlesBtn = document.getElementById('relight-candles-btn');
+      const wishGrantedBox = document.getElementById('wish-granted-box');
+      const cakeInstruction = document.getElementById('cake-instruction');
+      let allBlownCelebrated = false;
+
+      function checkAllCandlesBlown() {
+        const blownCount = candleGroups.filter(c => c.classList.contains('candle-blown')).length;
+        if (blownCount === candleGroups.length && !allBlownCelebrated) {
+          allBlownCelebrated = true;
+          wishGrantedBox.classList.remove('hidden');
+          blowCandlesBtn.classList.add('hidden');
+          relightCandlesBtn.classList.remove('hidden');
+          cakeInstruction.textContent = '✨ Todas las velitas se apagaron con tu deseo ✨';
+          musicBox.playMagicChime();
+          launchCelebrationShow();
+        }
+      }
+
+      function blowOutCandle(candleEl) {
+        if (candleEl.classList.contains('candle-blown')) return;
+        candleEl.classList.add('candle-blown');
+        const rect = candleEl.getBoundingClientRect();
+        createConfettiBurst(rect.left + rect.width / 2, rect.top + 15, 14);
+        checkAllCandlesBlown();
+      }
+
+      candleGroups.forEach((candle) => {
+        candle.addEventListener('click', () => blowOutCandle(candle));
+        candle.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            blowOutCandle(candle);
+          }
+        });
+      });
+
+      blowCandlesBtn.addEventListener('click', () => {
+        const litCandles = candleGroups.filter(c => !c.classList.contains('candle-blown'));
+        litCandles.forEach((candle, idx) => {
+          setTimeout(() => blowOutCandle(candle), idx * 210);
+        });
+      });
+
+      relightCandlesBtn.addEventListener('click', () => {
+        allBlownCelebrated = false;
+        candleGroups.forEach(c => c.classList.remove('candle-blown'));
+        wishGrantedBox.classList.add('hidden');
+        relightCandlesBtn.classList.add('hidden');
+        blowCandlesBtn.classList.remove('hidden');
+        cakeInstruction.textContent = 'Cierra los ojitos, piensa en tu deseo más bonito y toca cada velita (o presiona el botón) para soplarlas.';
+        showToast('🕯️ ¡Velitas encendidas otra vez! Pide otro deseo', 2400);
+      });
+
+      // ----- 3) Carta de amor interactiva (Sobre 3D + Modal) -----
+      const loveEnvelope = document.getElementById('love-envelope');
+      const openLetterBtn = document.getElementById('open-letter-btn');
+      const letterModal = document.getElementById('letter-modal');
+      const closeLetterBtn = document.getElementById('close-letter-btn');
+      const closeLetterX = document.getElementById('close-letter-x');
+
+      function openLetterSequence() {
+        loveEnvelope.classList.add('opened');
+        musicBox.playMagicChime();
+        const rect = loveEnvelope.getBoundingClientRect();
+        createConfettiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 24);
+
+        setTimeout(() => {
+          letterModal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }, 560);
+      }
+
+      function closeLetterSequence() {
+        letterModal.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          loveEnvelope.classList.remove('opened');
+        }, 320);
+      }
+
+      loveEnvelope.addEventListener('click', openLetterSequence);
+      loveEnvelope.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLetterSequence();
+        }
+      });
+      openLetterBtn.addEventListener('click', openLetterSequence);
+      closeLetterBtn.addEventListener('click', closeLetterSequence);
+      closeLetterX.addEventListener('click', closeLetterSequence);
+
+      letterModal.addEventListener('click', (e) => {
+        if (e.target === letterModal) closeLetterSequence();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && letterModal.classList.contains('open')) {
+          closeLetterSequence();
+        }
+      });
+
+      // ----- 4) Tarjetas 3D Flip ("Pequeñas cosas que amo de ti") -----
+      const flipCards = Array.from(document.querySelectorAll('.flip-card'));
+      const cardsCounterEl = document.getElementById('cards-counter');
+      const discoveredCards = new Set();
+
+      function registerCardDiscovery(cardEl) {
+        const id = cardEl.getAttribute('data-card');
+        if (!discoveredCards.has(id)) {
+          discoveredCards.add(id);
+          cardsCounterEl.textContent = `✨ ${discoveredCards.size} de 6 destellos descubiertos`;
+          if (discoveredCards.size === 6) {
+            cardsCounterEl.textContent = '💖 ¡Descubriste los 6 destellos de nuestra constelación! ✨';
+            showToast('✨ ¡Y todavía existen mil razones más por las que te quiero! 💖', 3800);
+            launchCelebrationShow();
+          }
+        }
+      }
+
+      flipCards.forEach((card) => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('is-flipped');
+          registerCardDiscovery(card);
+        });
+        card.addEventListener('mouseenter', () => {
+          if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            registerCardDiscovery(card);
+          }
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.classList.toggle('is-flipped');
+            registerCardDiscovery(card);
+          }
+        });
+      });
+
+      // ----- 5) Botón final: Lanzar un deseo al cielo -----
+      const launchWishBtn = document.getElementById('launch-wish-btn');
+      const lanternCounterEl = document.getElementById('lantern-counter');
+      let wishesLaunched = 0;
+
+      launchWishBtn.addEventListener('click', () => {
+        wishesLaunched++;
+        launchWishLanterns();
+        createFirework(random(width * 0.2, width * 0.8), random(height * 0.18, height * 0.42), 1.05);
+        musicBox.playMagicChime();
+
+        lanternCounterEl.textContent = wishesLaunched === 1
+          ? '🏮 1 deseo iluminando el cielo de Annie ✨'
+          : `🏮 ${wishesLaunched} deseos iluminando el cielo de Annie ✨`;
+
+        if (wishesLaunched === 1) {
+          showToast('🏮 ¡Tu deseo ya está volando hacia las estrellas! ✨', 2800);
+        } else if (wishesLaunched % 3 === 0) {
+          showToast('💖 ¡El cielo brilla más bonito con tus deseos, Annie mi mensa!', 2800);
+        }
+      });
+
+      // ----- 6) Aparición suave de secciones al hacer scroll -----
+      const revealEls = document.querySelectorAll('.reveal-on-scroll');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(el => observer.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('visible'));
+      }
+    })();
+  </script>
+</body>
+</html>
